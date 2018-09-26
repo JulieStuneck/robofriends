@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import CardList from './CardList';
-import SearchBox from './SearchBox';
+import CardList from '../components/CardList';
+import SearchBox from '../components/SearchBox';
 //robots used in initial construction, later, grabbed link
 //import { robots } from './robots';//have to descructure {} name because robots.js does not export as a default
-import Scroll from './Scroll';
+import Scroll from '../components/Scroll';
 import './App.css';
 
 //"smart" component has state and usu class syntax
@@ -35,12 +35,15 @@ class App extends Component {
 	}
 
 	render() {
-		const filteredRobots = this.state.robots.filter(robots =>{ //this tells the robotsList change in searchbox
-			return robots.name.toLowerCase().includes(this.state.searchfield.toLowerCase());//will only return the robots that return true to comparison
+		const { robots, searchfield } = this.state;
+		const filteredRobots = robots.filter(robot =>{ //this tells the robotsList change in searchbox
+			return robot.name.toLowerCase().includes(searchfield.toLowerCase());//will only return the robots that return true to comparison
 		})
 		console.log('render');//1st time as [], 2nd time as updated [robots]
 
-		if (this.state.robots.length === 0) { //in case server takes a long time retun user list
+		/*if (robots.length === 0) {*/ //in case server takes a long time retun user list
+		//if statement re-written as ternary, below
+		/*	if(!robots.length) {
 			return <h1>Loading</h1>
 		} else {
 		return (
@@ -51,13 +54,20 @@ class App extends Component {
 					<CardList robots={filteredRobots}/>
 				</Scroll>
 			</div>
-		);	
-
-	
-		
-		}
-
-	}	
+		);			
+		}*/
+		return !robots.length ?
+			<h1>Loading</h1> :
+		(
+			<div className = 'tc'>
+				<h1 className='f1'>RoboFriends</h1>
+				<SearchBox searchChange={this.onSearchChange}/>
+				<Scroll>
+					<CardList robots={filteredRobots}/>
+				</Scroll>
+			</div>
+		);			
+	}			
 }
 
 export default App;
