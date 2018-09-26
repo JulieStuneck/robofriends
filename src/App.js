@@ -3,6 +3,7 @@ import CardList from './CardList';
 import SearchBox from './SearchBox';
 //robots used in initial construction, later, grabbed link
 //import { robots } from './robots';//have to descructure {} name because robots.js does not export as a default
+import Scroll from './Scroll';
 import './App.css';
 
 //"smart" component has state and usu class syntax
@@ -46,7 +47,9 @@ class App extends Component {
 			<div className = 'tc'>
 				<h1 className='f1'>RoboFriends</h1>
 				<SearchBox searchChange={this.onSearchChange}/>
-				<CardList robots={filteredRobots}/>
+				<Scroll>
+					<CardList robots={filteredRobots}/>
+				</Scroll>
 			</div>
 		);	
 
