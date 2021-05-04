@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "http://myname.github.io/myapp",
   "dependencies": {
-    "merge": "^1.2.1",
+    "merge": "^2.1.1",
     "package": "^1.0.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
